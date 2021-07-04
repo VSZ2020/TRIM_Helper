@@ -1,0 +1,61 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:TRIM_Helper">
+    <Style x:Key="StyleEnableX_TextBox">
+        <Setter Property="TextBox.IsEnabled" Value="True"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=checkRndX, Path=IsChecked}" Value="True">
+                <Setter Property="TextBox.IsEnabled" Value="False"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="StyleEnableY_TextBox">
+        <Setter Property="TextBox.IsEnabled" Value="True"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=checkRndY, Path=IsChecked}" Value="True">
+                <Setter Property="TextBox.IsEnabled" Value="False"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="StyleEnableZ_TextBox">
+        <Setter Property="TextBox.IsEnabled" Value="True"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=checkRndZ, Path=IsChecked}" Value="True">
+                <Setter Property="TextBox.IsEnabled" Value="False"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="StyleEnableCosX_TextBox">
+        <Setter Property="TextBox.IsEnabled" Value="True"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=checkRndCosX, Path=IsChecked}" Value="True">
+                <Setter Property="TextBox.IsEnabled" Value="False"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="StyleEnableCosY_TextBox">
+        <Setter Property="TextBox.IsEnabled" Value="True"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=checkRndCosY, Path=IsChecked}" Value="True">
+                <Setter Property="TextBox.IsEnabled" Value="False"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="StyleEnableCosZ_TextBox">
+        <Setter Property="TextBox.IsEnabled" Value="True"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=checkRndCosZ, Path=IsChecked}" Value="True">
+                <Setter Property="TextBox.IsEnabled" Value="False"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="StyleEnableExtFile_Grid">
+        <Setter Property="Grid.IsEnabled" Value="False"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=cbIsCoordsFromFile, Path=IsChecked}" Value="True">
+                <Setter Property="Grid.IsEnabled" Value="True"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,309 @@
+﻿<Window x:Class="TRIM_Helper.TRIMDAT_Input"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TRIM_Helper"
+        mc:Ignorable="d"
+        Title="TRIMDAT_Input" Height="554" Width="614">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="{DynamicResource GenerateBtnRowHeight}"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!--Panel For Input File Data-->
+        <GroupBox Header="TRIM.IN Parameters" Grid.Row="0" Grid.Column="0" Padding="5" VerticalAlignment="Top" Margin="0,0,5,0">
+            <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_TextBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Ion" Grid.Column="0" Grid.Row="0" Style="{StaticResource LabelStyle}"/>
+                    <ComboBox x:Name="cmbIonsList" Grid.Column="1" Grid.Row="0" Height="{StaticResource TextBoxesHeight}"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_TextBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Ion Mass, a.m.u." Grid.Column="0" Grid.Row="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbIonMassInput" Grid.Column="1" Grid.Row="0" Height="{StaticResource TextBoxesHeight}"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_TextBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Energy, keV" Grid.Column="0" Grid.Row="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbIonEnergyInput" Grid.Column="1" Grid.Row="0" Height="{StaticResource TextBoxesHeight}"/>
+                </Grid>
+                <GroupBox Header="Layers List" Padding="5,5,5,5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="{StaticResource RowWithTextBoxesHeight}"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <ListBox x:Name="lbLayersList" Grid.Column="0" Grid.Row="0" MinHeight="{StaticResource ListBoxLayersHeight}"/>
+                        <Grid Grid.Column="0" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Button Content="Add layer" Grid.Column="0" Grid.Row="0"/>
+                            <Button Content="Edit layer" Grid.Column="1" Grid.Row="0"/>
+                            <Button Content="Remove layer" Grid.Column="2" Grid.Row="0"/>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Atom List" Padding="5,5,5,5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="{StaticResource RowWithTextBoxesHeight}"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <ListBox x:Name="lbAtomsList" Grid.Column="0" Grid.Row="0" MinHeight="{StaticResource ListBoxAtomsHeight}"/>
+                        <Grid Grid.Column="0" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Button Content="Add atom" Grid.Column="0" Grid.Row="0"/>
+                            <Button Content="Edit atom" Grid.Column="1" Grid.Row="0"/>
+                            <Button Content="Remove atom" Grid.Column="2" Grid.Row="0"/>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+                
+            </StackPanel>
+        </GroupBox>
+        <!--Panel For TRIM.dat File-->
+        <GroupBox Header="TRIM.dat Parameters" Grid.Row="0" Grid.Column="1" Margin="0,0,10,0" Padding="5" VerticalAlignment="Top">
+            <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_TextBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Line Name" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbCalcRowName" Grid.Row="0" Grid.Column="1" Height="{StaticResource TextBoxesHeight}"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_TextBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Comment Line (#8)" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbCommentLine" Grid.Row="0" Grid.Column="1" Height="{StaticResource TextBoxesHeight}"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_TextBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Ions Count" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbIonsCount" Grid.Row="0" Grid.Column="1" Height="{StaticResource TextBoxesHeight}"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_TextBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="DecimalPoints" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbDecimalPoints" Grid.Row="0" Grid.Column="1" Height="{StaticResource TextBoxesHeight}"/>
+                </Grid>
+                <Grid VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3TextBox}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3CheckBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text ="Position Params" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBlock Text="Value" Grid.Row="0" Grid.Column="1" Style="{StaticResource LabelStyle}" HorizontalAlignment="Center"/>
+                    <TextBlock Text="RND" Grid.Row="0" Grid.Column="2" Style="{StaticResource LabelStyle}"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3TextBox}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3CheckBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="X" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbCoordX" Grid.Row="0" Grid.Column="1" Height="{StaticResource TextBoxesHeight}"/>
+                    <CheckBox x:Name="cbRndX" Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3TextBox}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3CheckBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Y" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbCoordY" Grid.Row="0" Grid.Column="1" Height="{StaticResource TextBoxesHeight}"/>
+                    <CheckBox x:Name="cbRndY" Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3TextBox}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3CheckBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Z" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbCoordZ" Grid.Row="0" Grid.Column="1" Height="{StaticResource TextBoxesHeight}"/>
+                    <CheckBox x:Name="cbRndZ" Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3TextBox}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3CheckBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Cos X" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbCosX" Grid.Row="0" Grid.Column="1" Height="{StaticResource TextBoxesHeight}"/>
+                    <CheckBox x:Name="cbRndCosX" Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3TextBox}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3CheckBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Cos Y" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbCosY" Grid.Row="0" Grid.Column="1" Height="{StaticResource TextBoxesHeight}"/>
+                    <CheckBox x:Name="cbRndCosY" Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3TextBox}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_3CheckBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Cos Z" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbCosZ" Grid.Row="0" Grid.Column="1" Height="{StaticResource TextBoxesHeight}"/>
+                    <CheckBox x:Name="cbRndCosZ" Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_TextBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Target Depth (from; to)" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbTargetLimitsInput" Grid.Row="0" Grid.Column="1" Height="{StaticResource TextBoxesHeight}"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_TextBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Zenith Angle Limits" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbZenithAngleLimitsInput" Grid.Row="0" Grid.Column="1" Height="{StaticResource TextBoxesHeight}"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_Label}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnWidth_TextBox}"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Azimuth Angle Limits" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="tbAzimuthAngleLimitsInput" Grid.Row="0" Grid.Column="1" Height="{StaticResource TextBoxesHeight}"/>
+                </Grid>
+                <StackPanel>
+                    <CheckBox IsChecked="False" x:Name="cbIsCoordsFromFile" Content="Get Coordinates From File" Height="{StaticResource TextBoxesHeight}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+                    <Grid x:Name="gridBlockWithExternalFileInputs" Style="{StaticResource StyleEnableExtFile_Grid}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{StaticResource RowWithTextBoxesHeight}"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{StaticResource ColumnWidth_3Label}"/>
+                            <ColumnDefinition Width="{StaticResource ColumnWidth_3TextBox}"/>
+                            <ColumnDefinition Width="{StaticResource ColumnWidth_3CheckBox}"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="External File Path" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tbExternalFilePath" Grid.Row="0" Grid.Column="1"/>
+                        <Button x:Name="btnOpenExtFileSelectFileDialog" Content="..." Grid.Column="2" Grid.Row="0"/>
+                    </Grid>
+                    <CheckBox IsChecked="False" x:Name="cbIsReversedCoords" Content="Reverse X Coordinates" Height="{StaticResource TextBoxesHeight}" VerticalContentAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource RowWithTextBoxesHeight}"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Content="OK" Grid.Column="0" Grid.Row="0"/>
+            <Button Content="Cancel" Grid.Column="1" Grid.Row="0" Margin="5,0,0,0"/>
+        </Grid>
+    </Grid>
+</Window>

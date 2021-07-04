@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:TRIM_Helper"
+    xmlns:System="clr-namespace:System;assembly=System.Runtime">
+    <GridLength x:Key="GenerateBtnRowHeight">42</GridLength>
+    <GridLength x:Key="RowWithTextBoxesHeight">26</GridLength>
+    <GridLength x:Key="ColumnWithMiniButtonWidth">30</GridLength>
+    <GridLength x:Key="RowDescriptionLabelHeight">18</GridLength>
+    <GridLength x:Key="ColumnWidth_Label">0.5*</GridLength>
+    <GridLength x:Key="ColumnWidth_TextBox">0.5*</GridLength>
+    <GridLength x:Key="ColumnWidth_3Label">0.5*</GridLength>
+    <GridLength x:Key="ColumnWidth_3TextBox">0.4*</GridLength>
+    <GridLength x:Key="ColumnWidth_3CheckBox">0.1*</GridLength>
+    <System:Double x:Key="MiniButtonHeight">23</System:Double>
+    <System:Double x:Key="MiniButtonWidth">30</System:Double>
+    <System:Double x:Key="GenerateButtonHeight">40</System:Double>
+    <System:Double x:Key="TextBoxesHeight">23</System:Double>
+    <System:Double x:Key="ProgressBarWidth">150</System:Double>
+    <System:Double x:Key="GridViewColumnStatusWidth">50</System:Double>
+    <System:Double x:Key="GridViewColumnLayersCountWidth">50</System:Double>
+    <System:Double x:Key="ListBoxLayersHeight">80</System:Double>
+    <System:Double x:Key="ListBoxAtomsHeight">150</System:Double>
+</ResourceDictionary>

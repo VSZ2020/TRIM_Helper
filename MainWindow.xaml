@@ -1,0 +1,261 @@
+﻿<Window x:Class="TRIM_Helper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TRIM_Helper"
+        mc:Ignorable="d"
+        Title="TRIM Helper" Width="641" Height="570" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="23"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TabControl>
+            <!--***************The 1st TAB PAGE***************-->
+            <TabItem Header="TRIM.DAT Generator">
+                <Grid Margin="5,5,5,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="{DynamicResource GenerateBtnRowHeight}"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <!--Ion Parameters-->
+                    <GroupBox Header="Ion Parameters" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" Padding="10,0,5,10" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+                        <Grid VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.4*"/>
+                                <ColumnDefinition Width="0.6*"/>
+                                <ColumnDefinition Width="26"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{DynamicResource RowDescriptionLabelHeight}"/>
+                                <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                                <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                                <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                                <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                                <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                                <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                                <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                                <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                            </Grid.RowDefinitions>
+                            <!--Description-->
+                            <TextBlock Text="Value" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"/>
+                            <TextBlock Text="Rnd" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"/>
+                            <!--Energy-->
+                            <TextBlock Text="Energy (keV)" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Style="{StaticResource LabelStyle}"/>
+                            <TextBox x:Name="tbEnergy" Text="110" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" Height="{DynamicResource MiniButtonHeight}"/>
+                            <!--Z number-->
+                            <TextBlock Text="Z (Atom Number)" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource LabelStyle}"/>
+                            <TextBox x:Name="tbZ" Text="84" Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" Height="{DynamicResource MiniButtonHeight}"/>
+                            <!--Depth X-->
+                            <TextBlock Text="Depth X (A)" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" Style="{StaticResource LabelStyle}"/>
+                            <TextBox x:Name="IonXcoord" Style="{DynamicResource ResourceKey=StyleEnableX_TextBox}" Text="0" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" Height="{DynamicResource MiniButtonHeight}"/>
+                            <CheckBox x:Name="checkRndX" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <!--Width Y-->
+                            <TextBlock Text="Width Y (A)" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" Style="{StaticResource LabelStyle}"/>
+                            <TextBox x:Name="IonYcoord" Style="{DynamicResource ResourceKey=StyleEnableY_TextBox}" Text="0" Grid.Column="1" Grid.Row="4" VerticalContentAlignment="Center" Height="{DynamicResource MiniButtonHeight}"/>
+                            <CheckBox x:Name="checkRndY" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <!--Length Z-->
+                            <TextBlock Text="Height Z (A)" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" Style="{StaticResource LabelStyle}"/>
+                            <TextBox x:Name="IonZcoord" Style="{DynamicResource ResourceKey=StyleEnableZ_TextBox}" Text="0" Grid.Column="1" Grid.Row="5" VerticalContentAlignment="Center" Height="{DynamicResource MiniButtonHeight}"/>
+                            <CheckBox x:Name="checkRndZ" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <!--Cos X-->
+                            <TextBlock Text="Cos X" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" Style="{StaticResource LabelStyle}"/>
+                            <TextBox x:Name="IonCosX" Style="{DynamicResource ResourceKey=StyleEnableCosX_TextBox}" Text="1" Grid.Column="1" Grid.Row="6" VerticalContentAlignment="Center" Height="{DynamicResource MiniButtonHeight}"/>
+                            <CheckBox x:Name="checkRndCosX" Grid.Column="2" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <!--Cos Y-->
+                            <TextBlock Text="Cos Y" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" Style="{StaticResource LabelStyle}"/>
+                            <TextBox x:Name="IonCosY" Style="{DynamicResource ResourceKey=StyleEnableCosY_TextBox}" Text="0" Grid.Column="1" Grid.Row="7" VerticalContentAlignment="Center" Height="{DynamicResource MiniButtonHeight}"/>
+                            <CheckBox x:Name="checkRndCosY" Grid.Column="2" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <!--Cos Z-->
+                            <TextBlock Text="Cos Z" Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" Style="{StaticResource LabelStyle}"/>
+                            <TextBox x:Name="IonCosZ" Style="{DynamicResource ResourceKey=StyleEnableCosZ_TextBox}" Text="0" Grid.Column="1" Grid.Row="8" VerticalContentAlignment="Center" Height="{DynamicResource MiniButtonHeight}"/>
+                            <CheckBox x:Name="checkRndCosZ" Grid.Column="2" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </GroupBox>
+                    <!--Right Grid for Target and Angles Parameters-->
+                    <Grid Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" Margin="5,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--Target Parameters-->
+                        <GroupBox Header="Target Parameters" Grid.Row="0" Grid.Column="0" Padding="10,0,10,5" VerticalAlignment="Stretch" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" >
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="{DynamicResource RowDescriptionLabelHeight}"/>
+                                    <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                                    <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                                    <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.45*"/>
+                                    <ColumnDefinition Width="0.55*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="(From;To)" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" FontWeight="Normal" FontStyle="Normal"/>
+                                <TextBlock Text="Length X (A)" Grid.Column="0" Grid.Row="1" Style="{StaticResource LabelStyle}" VerticalAlignment="Center"/>
+                                <TextBox x:Name="targetDepth" Grid.Row="1" Grid.Column="1" Height="{DynamicResource MiniButtonHeight}" VerticalContentAlignment="Center" Text="0;3000"/>
+                                <TextBlock Text="Width Y (A)" Grid.Column="0" Grid.Row="2" Style="{StaticResource LabelStyle}" VerticalAlignment="Center"/>
+                                <TextBox x:Name="targetWidth" Grid.Row="2" Grid.Column="1" Height="{DynamicResource MiniButtonHeight}" VerticalContentAlignment="Center" Text="-1500;1500"/>
+                                <TextBlock Text="Height Z (A)" Grid.Column="0" Grid.Row="3" Style="{StaticResource LabelStyle}" VerticalAlignment="Center"/>
+                                <TextBox x:Name="targetHeight" Grid.Row="3" Grid.Column="1" Height="{DynamicResource MiniButtonHeight}" VerticalContentAlignment="Center" Text="-1500;1500"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="Ion Incidence Angle Limits" Padding="10,0,10,5" Grid.Row="1" Grid.Column="0" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" VerticalAlignment="Stretch">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="{DynamicResource RowDescriptionLabelHeight}"/>
+                                    <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                                    <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.45*"/>
+                                    <ColumnDefinition Width="0.55*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="(From;To)" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"/>
+                                <TextBlock Text="Zenith angle (Deg)" Grid.Column="0" Grid.Row="1" Style="{StaticResource LabelStyle}" VerticalAlignment="Center"/>
+                                <TextBox x:Name="IonZenithAngleLimits" Grid.Row="1" Grid.Column="1" Height="{DynamicResource MiniButtonHeight}" VerticalContentAlignment="Center" Text="0;180"/>
+                                <TextBlock Text="Azimuth angle (Deg)" Grid.Column="0" Grid.Row="2" Style="{StaticResource LabelStyle}" VerticalAlignment="Center"/>
+                                <TextBox x:Name="IonAzimuthAngleLimits" Grid.Row="2" Grid.Column="1" Height="{DynamicResource MiniButtonHeight}" VerticalContentAlignment="Center" Text="0;360"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="Generation properties" Grid.Row="2" Grid.Column="0" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Padding="10,5,10,5" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="{StaticResource RowWithTextBoxesHeight}"/>
+                                    <RowDefinition Height="{StaticResource RowWithTextBoxesHeight}"/>
+                                    <RowDefinition Height="{StaticResource RowWithTextBoxesHeight}"/>
+                                    <RowDefinition Height="{StaticResource RowWithTextBoxesHeight}"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.45*"/>
+                                    <ColumnDefinition Width="0.55*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Name" Grid.Column="0" Grid.Row="0" Style="{StaticResource LabelStyle}" VerticalAlignment="Center"/>
+                                <TextBlock Text="Ions Count" Grid.Column="0" Grid.Row="1" Style="{StaticResource LabelStyle}" VerticalAlignment="Center"/>
+                                <TextBlock Text="Decimal Points" Grid.Column="0" Grid.Row="2" Style="{StaticResource LabelStyle}" VerticalAlignment="Center"/>
+                                <TextBlock Text="Comment (line #8)" Grid.Column="0" Grid.Row="3" Style="{StaticResource LabelStyle}" VerticalAlignment="Center"/>
+                                <TextBox x:Name="tbIonRowName" Grid.Row="0" Grid.Column="1" Height="{DynamicResource MiniButtonHeight}" VerticalContentAlignment="Center" VerticalAlignment="Center" Text="Empty"/>
+                                <TextBox x:Name="tbIonsCount" Grid.Row="1" Grid.Column="1" Height="{DynamicResource MiniButtonHeight}" VerticalContentAlignment="Center" VerticalAlignment="Center" Text="10000"/>
+                                <TextBox x:Name="tbDecimalPointsCount" Grid.Row="2" Grid.Column="1" Height="{DynamicResource MiniButtonHeight}" VerticalContentAlignment="Center" VerticalAlignment="Center" Text="5"/>
+                                <TextBox x:Name="tbCommentLineText" Grid.Row="3" Grid.Column="1" Height="{DynamicResource MiniButtonHeight}" VerticalContentAlignment="Center" VerticalAlignment="Center" Text=""/>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+
+                    <!--Files paths-->
+                    <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="5,5,0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                            <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*" MinWidth="140"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="{DynamicResource ColumnWithMiniButtonWidth}"/>
+                        </Grid.ColumnDefinitions>
+                        <!--SRIM dir selector-->
+                        <TextBlock x:Name="tbWorkingDirectory" Text="TRIM.exe path" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tbSRIM_OutPath" Text="SRIM\TRIM.exe"  Grid.Row="0" Grid.Column="1" Height="23" Margin="0,0,5,0" VerticalContentAlignment="Center"/>
+                        <Button x:Name="btnSelectWorkDir" Content="..." Grid.Column="2" Grid.Row="0" Height="{DynamicResource MiniButtonHeight}" Width="{DynamicResource MiniButtonWidth}"/>
+                        <!--TRIM.dat dir selector-->
+                        <TextBlock Text="TRIM.dat out path" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tbInputOutFolder" Text="" Grid.Row="1" Grid.Column="1" Height="23" Margin="0,0,5,0" VerticalContentAlignment="Center"/>
+                        <Button x:Name="btnSelectOutPath" Content="..." Grid.Column="2" Grid.Row="1" Height="{DynamicResource MiniButtonHeight}" Width="{DynamicResource MiniButtonWidth}"/>
+                    </Grid>
+                    <Button x:Name="btnGenerateInput" Content="Generate TRIM.dat" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Height="{DynamicResource GenerateButtonHeight}"/>
+                </Grid>
+            </TabItem>
+            <!--***************The 2nd TAB PAGE***************-->
+            <TabItem Header="TRIM Output">
+                <Grid VerticalAlignment="Top" Margin="5,5,5,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="{DynamicResource GenerateBtnRowHeight}"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*" MinWidth="140"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="{DynamicResource ColumnWithMiniButtonWidth}"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="RANGE.txt File Path" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tbRangeFilePath" Text="SRIM\SRIM Outputs\RANGE.txt" Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Center" Margin="0,0,5,0" VerticalAlignment="Center" Height="{DynamicResource MiniButtonHeight}"/>
+                        <Button x:Name="btnOpenRangeFileDialog" Content="..." Grid.Column="2" Grid.Row="0" Height="{DynamicResource MiniButtonHeight}" Width="{DynamicResource MiniButtonWidth}" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Button x:Name="btnGenerateSecondTRIMDataFile" Content="Generate TRIM.dat" Grid.Column="0" Grid.Row="1" Height="{DynamicResource GenerateButtonHeight}"/>
+                    <StackPanel Grid.Column="0" Grid.Row="2" Margin="0,10,0,0">
+                        <TextBox x:Name="tbTargetMaxWidth2" Text="3000"/>
+                        <Button x:Name="btnGenerateReversedCorrds" Content="Generate Reversed Coordinates" Height="{DynamicResource GenerateButtonHeight}" Click="ButtonClick"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TRIM Input 2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.7*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView x:Name="tasksList" Grid.Row="0" Grid.Column="0">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="IsActive" Width="{StaticResource GridViewColumnStatusWidth}">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding IsActive}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
+                                    <GridViewColumn Header="Layers" Width="{StaticResource GridViewColumnLayersCountWidth}" DisplayMemberBinding="{Binding LayersCount}"/>
+                                    <GridViewColumn Header="State" Width="{StaticResource GridViewColumnLayersCountWidth}" DisplayMemberBinding="{Binding Status}"/>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel Grid.Column="1" Grid.Row="0">
+                        <Button Content="Add Task" Height="{StaticResource GenerateButtonHeight}"/>
+                        <Button Content="Delete Selected Task" Height="{StaticResource GenerateButtonHeight}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
+                        <Button x:Name="btnRunTask" Content="Run Task 1" Height="{StaticResource GenerateButtonHeight}"/>
+                        <Button x:Name="btnExtractOutputFiles" Content="Extract Output Files" Height="{StaticResource GenerateButtonHeight}"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <StatusBar Grid.Column="0" Grid.Row="1">
+            <StatusBarItem Width="{StaticResource ProgressBarWidth}" Margin="0,0,5,0" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                <ProgressBar x:Name="prgBar" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="Status" x:Name="statusLabel"/>
+            </StatusBarItem>
+        </StatusBar>
+        
+    </Grid>
+</Window>
