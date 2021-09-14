@@ -1,7 +1,7 @@
 ﻿using TRIM_Helper.Model.LayerModel.MaterialModel;
 namespace TRIM_Helper.Model
 {
-    public class Ion : Element
+    public class Ion: Element
     {
         /// <summary>
         /// Ion Energy in KeV
@@ -16,11 +16,11 @@ namespace TRIM_Helper.Model
         public double BraggCorr = 0.0;
         public Ion()
         {
-
+            
         }
 
         public static Ion GetIonFromElement(Element el, double Energy = 1000, double angle = 0, double braggCoeff = 1.0)
-        {
+		{
             Ion ion = new Ion();
             ion.Z = el.Z;
             ion.Mass = el.Mass;
@@ -35,6 +35,6 @@ namespace TRIM_Helper.Model
             ion.BraggCorr = braggCoeff;
 
             return ion;
-        }
+		}
     }
 }

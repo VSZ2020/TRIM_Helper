@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Controls;
 using TRIM_Helper.Model;
 using TRIM_Helper.Model.LayerModel;
 using TRIM_Helper.Model.LayerModel.MaterialModel;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System;
 
 namespace TRIM_Helper
 {
@@ -22,11 +22,11 @@ namespace TRIM_Helper
         int currentSelectedLayerIndex = -1;
 
         private ComputationalTask mTask = null;
-
+       
         enum TasKWndMode
-        {
+		{
             CREATE, EDIT
-        }
+		}
 
         TasKWndMode WndMode = TasKWndMode.CREATE;
 
@@ -39,7 +39,7 @@ namespace TRIM_Helper
 
             //Apply TRIM dat and input files data to local variables
             if (task != null)
-            {
+			{
                 mTask = task;
                 this.curTrimInp = task.TrimInput;
                 this.curTrimDat = task.TrimOutput;
@@ -49,40 +49,30 @@ namespace TRIM_Helper
 
             InitComponentBinds();
 
-            btnOK.Click += BtnOKCancel_Click;
+			btnOK.Click += BtnOKCancel_Click;
             btnCancel.Click += BtnOKCancel_Click;
 
-            btnAddLayer.Click += BtnAdd_Click;
+			btnAddLayer.Click += BtnAdd_Click;
             btnAddElement.Click += BtnAdd_Click;
             btnEditLayer.Click += BtnEdit_Click;
             btnEditElement.Click += BtnEdit_Click;
-            btnRemoveLayer.Click += BtnRemove_Click;
+			btnRemoveLayer.Click += BtnRemove_Click;
             btnRemoveElement.Click += BtnRemove_Click;
 
-            btnCopyInputsBuffer.Click += BtnInputsBuffer_Click;
+			btnCopyInputsBuffer.Click += BtnInputsBuffer_Click;
             btnPasteFromBuffer.Click += BtnInputsBuffer_Click;
 
-            //Popup button actions
-            popbtnLayerOK.Click += PopbtnOK_Click;
+			//Popup button actions
+			popbtnLayerOK.Click += PopbtnOK_Click;
             popbtnElementOK.Click += PopbtnOK_Click;
-            popbtnLayerCancel.Click += PopbtnCancel_Click;
+			popbtnLayerCancel.Click += PopbtnCancel_Click;
             popbtnElementCancel.Click += PopbtnCancel_Click;
-
-            this.Closing += TRIMDAT_Input_Closing;
         }
 
-        private void TRIMDAT_Input_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            this.curTrimInp = null;
-            this.curTrimDat = null;
-            this.loadedElements = null;
-            GC.Collect();
-        }
-
-        private void BtnInputsBuffer_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender == btnCopyInputsBuffer)
-            {
+		private void BtnInputsBuffer_Click(object sender, RoutedEventArgs e)
+		{
+			if (sender == btnCopyInputsBuffer)
+			{
                 bool IsInputsCorrect = Read_TRIMIN_Fields() && Read_TRIMDAT_Inputs();
                 if (IsInputsCorrect)
                 {
@@ -91,114 +81,110 @@ namespace TRIM_Helper
                 }
                 else
                     MessageBox.Show("Check inputs, before copying the prefs");
-            }
+			}
 
             if (sender == btnPasteFromBuffer)
-            {
+			{
                 if (BufferClass.BufferInputFile != null && BufferClass.BufferDatFile != null)
-                {
-                    try
-                    {
+				{
+					try
+					{
                         this.curTrimInp = BufferClass.BufferInputFile;
                         this.curTrimDat = BufferClass.BufferDatFile;
 
                         //Search selected ion
                         for (int i = 0; i < loadedElements.Count; i++)
-                        {
+						{
                             if (loadedElements[i].ElementName == curTrimInp._Ion.ElementName)
-                            {
+							{
                                 cmbIonsList.SelectedIndex = i;
                                 break;
-                            }
-                        }
+							}
+						}
 
                         //Copy other parameters
 
 
                         MessageBox.Show("Successfully pasted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                    catch (Exception ex)
-                    {
+                    catch(Exception ex)
+					{
                         MessageBox.Show(string.Concat("An error occured during pasting of values from buffer", ex.Message), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-            }
-        }
+					}
+				}
+			}
+		}
 
-        private void BtnOKCancel_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender == btnOK)
-            {
+		private void BtnOKCancel_Click(object sender, RoutedEventArgs e)
+		{
+			if (sender == btnOK)
+			{
 
                 if (Read_TRIMIN_Fields() && Read_TRIMDAT_Inputs())
-                {
+				{
                     //Если оба условия выполнены и ощибок нет, то создаем(заменяем) задачу
                     //Parse task name
                     string taskName = tbTaskName.Text;
                     if (string.IsNullOrEmpty(taskName))
-                    {
+					{
                         Debug.WriteLine("The task name is incorrect. Edit it.", "ERROR");
                         MessageBox.Show("Incorrect task name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
-                    }
-                    //Редактируем или создаем новое задание
+					}
                     if (WndMode == TasKWndMode.EDIT)
-                    {
+					{
                         mTask.TrimInput = curTrimInp;
                         mTask.TrimOutput = curTrimDat;
                         mTask.Name = taskName;
                         mTask.WorkingDirectory = MainWindow.CurrentWorkingPath + taskName + "\\";
-                        
                     }
                     else
-                    {
-                        var task = new ComputationalTask()
+					{
+                        MainWindow.Tasks.Add(new ComputationalTask()
                         {
                             TrimInput = curTrimInp,
                             TrimOutput = curTrimDat,
                             IsActive = true,
                             Name = taskName,
                             WorkingDirectory = MainWindow.CurrentWorkingPath + taskName + "\\"
-                        };
-                        MainWindow.Tasks.Add(task);
-                        
+                        });
                     }
                     
                     this.Close();
-                }
+				}
                 else
-                {
+				{
                     Debug.WriteLine("It's impossible add new task due to error(s) in input fields", "ERROR");
-                }
+				}
             }
             if (sender == btnCancel)
-            {
+			{
                 this.Close();
-            }
-        }
+			}
+		}
 
-        private void PopbtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender == popbtnLayerCancel)
-            {
+		private void PopbtnCancel_Click(object sender, RoutedEventArgs e)
+		{
+			if (sender == popbtnLayerCancel)
+			{
                 popupLayer.IsOpen = false;
-            }
-
+            }     
+            
             if (sender == popbtnElementCancel)
-            {
+			{
                 popupElement.IsOpen = false;
-            }
-        }
+			}
+		}
 
-        private void PopbtnOK_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender == popbtnElementOK)
-            {
+		private void PopbtnOK_Click(object sender, RoutedEventArgs e)
+		{
+			if (sender == popbtnElementOK)
+			{
                 int i = lbLayersList.SelectedIndex;
                 if (i > -1)
                 {
-                    try
-                    {
+					try
+					{
                         Element el = popcmbElement.SelectedValue as Element;
                         double stoich = 1.0;
                         double mass = 1.0;
@@ -211,32 +197,32 @@ namespace TRIM_Helper
                         popupElement.IsOpen = false;
                     }
                     catch (Exception ex)
-                    {
+					{
                         MessageBox.Show(ex.Message);
                         Debug.WriteLine("Can't add new element. Check input boxes", "ERROR");
                         popupElement.IsOpen = false;
-                    }
-
+					}
+                    
                 }
             }
-        }
+		}
 
-        private void BtnRemove_Click(object sender, RoutedEventArgs e)
-        {
+		private void BtnRemove_Click(object sender, RoutedEventArgs e)
+		{
             if (sender == btnRemoveLayer)
-            {
+			{
                 if (curTrimInp.Layers.Count < 2)
-                {
+				{
                     MessageBox.Show("Nothing to delete");
-                }
+				}
                 if (curTrimInp.Layers.Count < 2)
-                {
+				{
                     curTrimInp.Layers.RemoveAt(0);
                     currentSelectedLayerIndex = -1;
-                }
-            }
-            if (sender == btnRemoveElement)
-            {
+				}
+			}
+		    if (sender == btnRemoveElement)
+			{
                 int selInd = lbAtomsList.SelectedIndex;
                 if (currentSelectedLayerIndex > -1 && selInd > -1)
                 {
@@ -244,21 +230,21 @@ namespace TRIM_Helper
                 }
                 else
                     MessageBox.Show("Firslty, choose the Layer and corresponding Element");
-            }
-        }
+			}
+		}
 
-        private void BtnEdit_Click(object sender, RoutedEventArgs e)
-        {
+		private void BtnEdit_Click(object sender, RoutedEventArgs e)
+		{
+			
+		}
 
-        }
-
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender == btnAddLayer)
-            {
+		private void BtnAdd_Click(object sender, RoutedEventArgs e)
+		{
+			if (sender == btnAddLayer)
+			{
                 //popupLayer.IsOpen = true;
                 curTrimInp.Layers.Add(new TargetLayer());
-            }
+			}
 
             if (sender == btnAddElement)
             {
@@ -273,9 +259,9 @@ namespace TRIM_Helper
         /// Инициализация всех связей полей и загруженных или введенных данных
         /// </summary>
         private void InitComponentBinds()
-        {
+		{
             if (loadedElements == null)
-            {
+			{
                 loadedElements = GetDefaultElementslist();
                 Debug.WriteLine("Default Ion was added!", "INFO");
             }
@@ -283,8 +269,8 @@ namespace TRIM_Helper
                 curTrimInp = new TrimInputFile(Ion.GetIonFromElement(loadedElements[0]), GetDefaultLayersCollection());
             if (curTrimDat == null)
                 curTrimDat = new TRIMDatFile();
-
-
+            
+            
             cmbIonsList.ItemsSource = loadedElements;
             cmbIonsList.DisplayMemberPath = "ElementName";
 
@@ -494,27 +480,27 @@ namespace TRIM_Helper
             }
         }
 
-        private void LbLayersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (lbLayersList.SelectedIndex > -1)
-            {
+		private void LbLayersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (lbLayersList.SelectedIndex > -1)
+			{
                 lbAtomsList.ItemsSource = curTrimInp.Layers[lbLayersList.SelectedIndex].Elements;
                 currentSelectedLayerIndex = lbLayersList.SelectedIndex;
             }
-        }
+		}
 
-        /// <summary>
-        /// Reading of the whole inputs and checking it
-        /// </summary>
-        private bool CheckIonFields()
-        {
+		/// <summary>
+		/// Reading of the whole inputs and checking it
+		/// </summary>
+		private bool CheckIonFields()
+		{
             //Reading of Ion Inputs
             if (cmbIonsList.SelectedIndex == -1)
-            {
+			{
                 Debug.WriteLine("The ion was not selected from the list", "TRIM.IN Window");
                 return false;
             }
-
+            
             double bufMass = 1.0;                                   //Default Mass value if an error will be
             double bufEnergy = 1000.0;                              //Default Energy value if an error will be
             bool IsPassed = double.TryParse(tbIonMassInput.Text, out bufMass) && double.TryParse(tbIonEnergyInput.Text, out bufEnergy);
@@ -524,9 +510,9 @@ namespace TRIM_Helper
             curTrimInp._Ion.Mass = bufMass;
             //curTrimInp._Ion.Energy = bufEnergy;
             return true;
-        }
+		}
         private bool Read_TRIMIN_Fields()
-        {
+		{
             if (!CheckIonFields())
                 return false;
 
@@ -541,10 +527,10 @@ namespace TRIM_Helper
                 }
                 //Check Layer Properties
                 if (string.IsNullOrEmpty(curTrimInp.Layers[i].LayerName))
-                {
+				{
                     MessageBox.Show("Enter layer \'" + curTrimInp.Layers[i].LayerName + "\' name", "Warning", MessageBoxButton.OK, MessageBoxImage.Information);
                     return false;
-                }
+				}
                 //Checking of Layer Elements
                 //for (int j = 0; j < curTrimInp.Layers[i].Elements.Count; j++)
                 //{
@@ -554,32 +540,32 @@ namespace TRIM_Helper
             }
             //Set additional parameters
             curTrimInp.Cascades = 4;
-            curTrimInp.PlotType = TrimInputFile.TRIMPlotType.NO_PLOTS;
+            curTrimInp.PlotType = 5;
             return true;
-        }
+		}
 
         /// <summary>
         /// Reading of TRIM.DAT boxes and checking rules for values
         /// </summary>
         /// <returns></returns>
         private bool Read_TRIMDAT_Inputs()
-        {
+		{
             //Check input fields empty
-            if (string.IsNullOrEmpty(tbCalcRowName.Text) ||
-                string.IsNullOrEmpty(tbIonsCount.Text) ||
+            if (string.IsNullOrEmpty(tbCalcRowName.Text) || 
+                string.IsNullOrEmpty(tbIonsCount.Text) || 
                 string.IsNullOrEmpty(tbDecimalPoints.Text) ||
                 string.IsNullOrEmpty(tbTargetLimitsInput.Text) ||
                 string.IsNullOrEmpty(tbZenithAngleLimitsInput.Text) ||
                 string.IsNullOrEmpty(tbAzimuthAngleLimitsInput.Text))
-            {
+			{
                 Debug.WriteLine("One of the input filed is empty or whitespace!", "ERROR");
                 return false;
-            }
+			}
             if (curTrimDat == null)
                 curTrimDat = new TRIMDatFile();
-            //Reading inputs
-            try
-            {
+			//Reading inputs
+			try
+			{
                 curTrimDat.IonsCount = int.Parse(tbIonsCount.Text);
                 curTrimDat.DecimalPoints = int.Parse(tbDecimalPoints.Text);
                 curTrimDat.IonStartX = double.Parse(tbCoordX.Text);
@@ -589,15 +575,14 @@ namespace TRIM_Helper
                 curTrimDat.IonStartCosY = double.Parse(tbCosY.Text);
                 curTrimDat.IonStartCosZ = double.Parse(tbCosZ.Text);
             }
-            catch (Exception ex)
-            {
+            catch(Exception ex) 
+			{
                 Debug.WriteLine("Error in one of the input field", "ERROR");
                 return false;
-            }
+			}
 
             //Read angle constricts
             curTrimDat.Angles = ReadAngleInputs();
-
             //ReadTarget limits
             curTrimDat.Target = ReadTargetSize(cbAutoTargetDepth.IsChecked.Value, cbAutoTargetWidth.IsChecked.Value);
 
@@ -626,7 +611,7 @@ namespace TRIM_Helper
             IonTarget target = new IonTarget();                         //Create Taget Instance
             double sum = curTrimInp.GetLayersSumDepth();                //Get layers sum width
             if (IsAutoDepth)
-            {
+			{
                 target.Depth.Min = 0;
                 target.Depth.Max = sum;
             }
@@ -662,7 +647,7 @@ namespace TRIM_Helper
                     target.Height.Min = target.Width.Min;
                 }
             }
-
+            
             return target;
         }
         public AngleLimits ReadAngleInputs()
@@ -685,28 +670,21 @@ namespace TRIM_Helper
         }
 
         private static ObservableCollection<TargetLayer> GetDefaultLayersCollection()
-        {
-            //Набор стехиометрических коэффициентов для монацита
+		{
             List<Element> defElements = GetDefaultElementslist();
-            defElements[5].Stoich = 0.15833;        //Ce
-            defElements[4].Stoich = 0.15833;        //P
-            defElements[3].Stoich = 0.66667;        //O-16
-            defElements[6].Stoich = 0.01667;        //Th-16
-            var defElementsForMonazite = new ObservableCollection<Element>() { defElements[5], defElements[4], defElements[3], defElements[6] };
+            defElements[3].Stoich = 4.0;        //O-16
+            var defElementsForMonazite = new ObservableCollection<Element>() { defElements[5], defElements[4], defElements[3] };
 
-            //Набор стехиометрических коэффициентов для лавсана
             defElements = GetDefaultElementslist();
             defElements[0].Stoich = 14.0;        //H-1
             defElements[2].Stoich = 16.0;        //C-12
-            defElements[3].Stoich = 3.0;         //O-16
+            defElements[3].Stoich = 3.0;        //O-16
             var defElementsForLexan = new ObservableCollection<Element>() { defElements[0], defElements[2], defElements[3] };
-
-            //Формируем слои из набора элементов
             ObservableCollection<TargetLayer> Layers = new ObservableCollection<TargetLayer> { new TargetLayer() {
                     LayerName = "Monazite sand",
-                    Density = 5.0,
+                    Density = 4.6,
                     IsGas = false,
-                    Depth = 380000,
+                    Depth = 335000,
                     Elements = defElementsForMonazite },
             new TargetLayer() {
                 LayerName = "Lexan (ICRU-219)",
@@ -722,27 +700,26 @@ namespace TRIM_Helper
         }
 
         private static List<Element> GetDefaultElementslist()
-        {
+		{
             Element H = new Element { ElementName = "H", Z = 1, Mass = 1.008, E_d = 10, lattice = 3, surface = 2.0 };
-            Element He = new Element { ElementName = "He", Z = 2, Mass = 4.003, E_d = 5.0, lattice = 1.0, surface = 2.0 };
+            Element He  = new Element { ElementName = "He", Z = 2, Mass = 4.003, E_d = 5.0, lattice = 1.0, surface = 2.0 };
             Element C = new Element { ElementName = "C", Z = 6, Mass = 12.011, E_d = 28, lattice = 3.0, surface = 7.41 };
-            Element O = new Element { ElementName = "O", Z = 8, Mass = 15.999, E_d = 28, lattice = 3.0, surface = 2.0 };
-            Element P = new Element { ElementName = "P", Z = 15, Mass = 30.974, E_d = 25.0, lattice = 3.0, surface = 3.27 };
-            Element Th = new Element { ElementName = "Th", Z = 90, Mass = 232, E_d = 25.0, lattice = 3.0, surface = 5.93 };
-            Element Ce = new Element { ElementName = "Ce", Z = 58, Mass = 140.12, E_d = 25.0, lattice = 3.0, surface = 4.23 };
-            return new List<Element> { H, He, C, O, P, Ce, Th };
+            Element O   = new Element { ElementName = "O", Z = 8, Mass = 15.999, E_d = 28, lattice = 3.0, surface = 2.0 };
+            Element P   = new Element { ElementName = "P", Z = 15, Mass = 30.974, E_d = 25.0, lattice = 3.0, surface = 3.27 };
+            Element Th  = new Element { ElementName = "Th", Z = 90, Mass = 232, E_d = 25.0, lattice = 3.0, surface = 5.93 };
+            return new List<Element> { H, He, C, O, P, Th };
         }
-        public static ComputationalTask GetDefaultTask(string workDir, string taskName, double layerdepth, double IonEnergy)
-        {
+        public static ComputationalTask GetDefaultTask(string workDir, string taskName, double layerdepth)
+		{
             var elList = GetDefaultElementslist();
             ComputationalTask task = new ComputationalTask();
             Ion ion = Ion.GetIonFromElement(elList[1]);
-            ion.Energy = IonEnergy;
+            ion.Energy = 6778;
             var layers = GetDefaultLayersCollection();
-            layers[1].Depth = layerdepth;                       //Устанавливаем толщину второго слоя из лавсана
+            layers[1].Depth = layerdepth;
             task.TrimInput = new TrimInputFile(ion, layers);
             task.TrimInput.Cascades = 4;
-            task.TrimInput.PlotType = TrimInputFile.TRIMPlotType.NO_PLOTS;
+            task.TrimInput.Number = 10000;
             task.TrimInput.PlotDepthMin = 0;
             task.TrimInput.StoppingPowerVersion = 0;
             task.TrimInput.IsRanges = true;
@@ -751,8 +728,6 @@ namespace TRIM_Helper
             task.TrimInput.Collisions = 0;
 
             task.TrimOutput = new TRIMDatFile();
-            task.TrimOutput.IonsCount = 100000;
-            task.TrimOutput.CalcComment = taskName + " in Monazite sand with Lexan " + layerdepth.ToString() + " layer depth";
             task.TrimOutput.IsRandomCosX = true;
             task.TrimOutput.IsRandomCosY = true;
             task.TrimOutput.IsRandomCosZ = true;
@@ -761,13 +736,11 @@ namespace TRIM_Helper
             task.TrimOutput.IsRandomZ = true;
             task.TrimOutput.Target = new IonTarget();
             var target = task.TrimOutput.Target;
-            target.Depth.Max = 380000; double diff = 380000.0 / 2.0;
-            target.Width.Max = diff; target.Width.Min = -diff;
-            target.Height.Max = diff; target.Height.Min = -diff;
+            target.Depth.Max = 335000;      double diff = 335000.0 / 2.0;
+            target.Width.Max = diff;    target.Width.Min = -diff;
+            target.Height.Max = diff;   target.Height.Min = -diff;
 
-            task.TrimInput.Number = task.TrimOutput.IonsCount;
-
-            ref AngleLimits ang = ref task.TrimOutput.Angles;
+            var ang = task.TrimOutput.Angles;
             ang = new AngleLimits();
             ang.Azimuth.Max = 360;
             ang.Zenith.Max = 180;
@@ -780,25 +753,25 @@ namespace TRIM_Helper
             return task;
         }
         private void UpdateMaxPlotValue()
-        {
+		{
             if (curTrimInp != null)
-            {
+			{
                 if (curTrimInp.Layers != null)
-                {
+				{
                     try
                     {
                         curTrimInp.PlotDepthMax = (float)curTrimInp.GetLayersSumDepth();
 
                     }
-                    catch (Exception ex)
-                    {
+                    catch(Exception ex)
+					{
                         Debug.WriteLine(ex.Message, "ERROR");
-                    }
+					}
 
                 }
-            }
-
-        }
+			}
+			
+		}
     }
 
 }

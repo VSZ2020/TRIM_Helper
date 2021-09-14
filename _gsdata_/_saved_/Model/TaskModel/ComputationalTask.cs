@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using TRIM_Helper.Model.LayerModel;
-
+using System.ComponentModel;
+using System.Threading.Tasks;
 namespace TRIM_Helper.Model
 {
     public class ComputationalTask
@@ -35,19 +34,6 @@ namespace TRIM_Helper.Model
             get
             {
                 return TrimInput?.Layers.Count ?? 0;
-            }
-        }
-
-        //public double TotalDepth { get; set; }
-        public double TotalDepth
-        {
-            get
-            {
-                double D = 0.0;
-                ref ObservableCollection<TargetLayer> layers = ref TrimInput.Layers;
-                for (int i = 0; i < TrimInput.Layers.Count; i++)
-                    D += layers[i].Depth;
-                return D;
             }
         }
 

@@ -145,9 +145,9 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
                                         <TextBlock Text="{Binding Path=ElementName, Mode=TwoWay}" Grid.Row="0" Grid.Column="0" Width="120" Margin="5,0,0,0" TextAlignment="Left"/>
-                                        <TextBlock Text="{Binding Path=Z, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Width="30" TextAlignment="Left"/>
-                                        <TextBlock Text="{Binding Path=Mass, Mode=TwoWay}" Grid.Row="0" Grid.Column="2" TextAlignment="Left"/>
-                                        <TextBlock Text="{Binding Path=Stoich, Mode=TwoWay}" Grid.Row="0" Grid.Column="3" TextAlignment="Left"/>
+                                        <TextBlock Text="{Binding Path=Z, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Width="30" TextAlignment="Center"/>
+                                        <TextBlock Text="{Binding Path=Mass, Mode=TwoWay}" Grid.Row="0" Grid.Column="2" TextAlignment="Center"/>
+                                        <TextBlock Text="{Binding Path=Stoich, Mode=TwoWay}" Grid.Row="0" Grid.Column="3" TextAlignment="Center"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

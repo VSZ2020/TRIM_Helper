@@ -2,7 +2,10 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TRIM_Helper.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="TRIMdatFilePath" Type="System.String" Scope="User">
+    <Setting Name="WorkingDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SRIMDir" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

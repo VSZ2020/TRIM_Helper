@@ -2,35 +2,14 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>TRIM_Helper</RootNamespace>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>TRIM Helper logo.ico</ApplicationIcon>
     <Copyright>Vyacheslav</Copyright>
     <RepositoryUrl>https://github.com/VSZ2020/TRIM_Helper</RepositoryUrl>
     <RepositoryType>Public</RepositoryType>
-    <AssemblyName>TRIM_Helper</AssemblyName>
-    <Authors>Izgagin Vyacheslav</Authors>
-    <Company>Personal Product</Company>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="_gsdata_\**" />
-    <EmbeddedResource Remove="_gsdata_\**" />
-    <None Remove="_gsdata_\**" />
-    <Page Remove="_gsdata_\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove=".gitattributes" />
-    <None Remove=".gitignore" />
-    <None Remove="Publish-DEBUG-Win-x86 CoreRT.bat" />
-    <None Remove="Publish-Win-x86 CoreRT.bat" />
-    <None Remove="Publish-Win-x86.bat" />
-    <None Remove="README.md" />
-    <None Remove="TRIM Helper logo.ai" />
-  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

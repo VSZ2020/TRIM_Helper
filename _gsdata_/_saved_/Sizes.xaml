@@ -15,11 +15,9 @@
     <System:Double x:Key="MiniButtonHeight">23</System:Double>
     <System:Double x:Key="MiniButtonWidth">30</System:Double>
     <System:Double x:Key="GenerateButtonHeight">40</System:Double>
-    <System:Double x:Key="ButtonStandartWidth">160</System:Double>
     <System:Double x:Key="TextBoxesHeight">21</System:Double>
     <System:Double x:Key="ProgressBarWidth">150</System:Double>
     <System:Double x:Key="GridViewColumnStatusWidth">50</System:Double>
-    <System:Double x:Key="GridViewColumnTotalDepthWidth">150</System:Double>
     <System:Double x:Key="GridViewColumnLayersCountWidth">50</System:Double>
     <System:Double x:Key="ListBoxLayersHeight">80</System:Double>
     <System:Double x:Key="ListBoxAtomsHeight">100</System:Double>

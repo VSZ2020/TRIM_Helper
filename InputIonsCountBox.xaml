@@ -1,0 +1,33 @@
+﻿<Window x:Class="TRIM_Helper.InputIonsCountBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TRIM_Helper"
+        mc:Ignorable="d"
+        Title="Input Box" Width="364" WindowStartupLocation="CenterScreen" Height="125">
+    <Grid Margin="5,5,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.30*"/>
+            <RowDefinition Height="0.25*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Input Ions amount" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" x:Name="tbIonsCount" Height="{StaticResource TextBoxesHeight}" Text="10000"/>
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Grid.Row="0" Height="23" Margin="5,0,0,0" Content="OK" x:Name="btnOK"/>
+            <Button Grid.Column="1" Grid.Row="0" Height="23" Margin="5,0,0,0" Content="Cancel" x:Name="btnCancel"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,28 +1,21 @@
-﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
+﻿using System;
 using TRIM_Helper.Model.LayerModel;
+using TRIM_Helper.Model.LayerModel.MaterialModel;
+using System.IO;
+using System.Collections.Generic;
+using System.Text;
+using System.Collections.ObjectModel;
 
 namespace TRIM_Helper.Model
 {
     public class TrimInputFile
     {
-        public enum TRIMPlotType
-        {
-            WITH_RECOIL_Y_PLANE = 0,
-            WITH_RECOIL_Z_PLANE = 1,
-            NO_RECOIL_Y_PLANE = 2,
-            TRANSVERSE_YZ_PLANE = 3,
-            ALL_PLOTS = 4,
-            NO_PLOTS = 5
-        }
-
         private float _plotMaxDepth = 1000;
         public Ion _Ion { get; set; }
         public ObservableCollection<TargetLayer> Layers;
 
-        public int AutoSaveNumber = 1000;
-        public TRIMPlotType PlotType = TRIMPlotType.WITH_RECOIL_Y_PLANE;    //0-5
+        public int  AutoSaveNumber = 1000;
+        public byte PlotType = 0;    //0-5
         public float PlotDepthMin { get; set; } = 0;
         public float PlotDepthMax
         {
@@ -33,10 +26,10 @@ namespace TRIM_Helper.Model
                 _plotMaxDepth = (float)GetLayersSumDepth();
                 return _plotMaxDepth;
             }
-            set
-            {
+			set
+			{
                 _plotMaxDepth = value;
-            }
+			}
         }
         public byte Cascades = 1;   //1 - 7
         public byte StoppingPowerVersion = 0;
@@ -50,7 +43,7 @@ namespace TRIM_Helper.Model
         /// Write collisions to file
         /// (0 - No, 1 -Ions, 2 - Ions+Recoils)
         /// </summary>
-        public byte Collisions { get; set; } = 0;
+        public byte Collisions { get; set; } = 0; 
         public double EXYZ = 0.0;
 
         public int RndSeed { get; set; } = 0;
@@ -63,12 +56,12 @@ namespace TRIM_Helper.Model
             this.Layers = layers;
         }
 
-        public void GenerateInputFile(string FilePath)
+		public void GenerateInputFile(string FilePath)
         {
             if (!Directory.Exists(FilePath)) throw new System.Exception("Directory " + FilePath + " doesn't exist!");
             int layersCount = Layers?.Count ?? 0;
 
-            FilePath = (!string.IsNullOrEmpty(FilePath)) ? Path.Combine(FilePath,"TRIM.IN") : "TRIM.IN";
+            FilePath = (!string.IsNullOrEmpty(FilePath)) ? FilePath + "TRIM.IN" : "TRIM.IN";
             using (StreamWriter wr = new StreamWriter(FilePath))
             {
                 wr.Write(
@@ -114,7 +107,7 @@ namespace TRIM_Helper.Model
                 wr.WriteLine("PlotType (0-5); Plot Depths: Xmin, Xmax(Ang.) [=0 0 for Viewing Full Target]\r\n" +
                     string.Format(
                     "{0} {1} {2}",
-                    ((int)PlotType),
+                    PlotType,
                     PlotDepthMin,
                     PlotDepthMax
                     ));
@@ -199,10 +192,10 @@ namespace TRIM_Helper.Model
         }
 
         public double GetLayersSumDepth()
-        {
+		{
             double sum = 0.0;
             if (this.Layers != null)
-            {
+			{
                 for (int i = 0; i < Layers.Count; i++)
                 {
                     if (Layers[i] == null)
@@ -210,12 +203,7 @@ namespace TRIM_Helper.Model
                     sum += Layers[i].Depth;
                 }
             }
-            else
-            {
-                Trace.WriteLine("Layers sum depth was Zero!");
-                Trace.Flush();
-            }
             return sum;
-        }
+		}
     }
 }
