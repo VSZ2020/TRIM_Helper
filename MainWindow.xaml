@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TRIM_Helper"
         mc:Ignorable="d"
-        Title="TRIM Helper" Width="641" Height="570" WindowStartupLocation="CenterScreen">
+        Title="TRIM Helper" Width="703" Height="570" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -16,18 +16,18 @@
         </Grid.ColumnDefinitions>
         <TabControl>
             <TabItem Header="TRIM Tasks">
-                <Grid>
+                <Grid Margin="5,0,5,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.7*"/>
-                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="200"/>
                     </Grid.ColumnDefinitions>
                     <!--Files paths-->
-                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" Margin="5,5,5,5">
+                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" Margin="5,5,0,5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
                             <RowDefinition Height="{DynamicResource RowWithTextBoxesHeight}"/>
@@ -60,11 +60,12 @@
                                     <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
                                     <GridViewColumn Header="Layers" Width="{StaticResource GridViewColumnLayersCountWidth}" DisplayMemberBinding="{Binding Path=LayersCount, NotifyOnSourceUpdated=True, Mode=Default}"/>
                                     <GridViewColumn Header="Total depth, um" Width="{StaticResource GridViewColumnTotalDepthWidth}" DisplayMemberBinding="{Binding Path=TotalDepth, Mode=Default, NotifyOnSourceUpdated=True}"/>
+                                    <GridViewColumn Header="Status" Width="{StaticResource GridViewColumnLayersCountWidth}" DisplayMemberBinding="{Binding Path=Status, Mode=Default, NotifyOnSourceUpdated=True}"/>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <StackPanel Grid.Column="1" Grid.Row="1" Margin="5,0,5,0">
+                    <StackPanel Grid.Column="1" Grid.Row="1" Margin="5,0,0,0">
                         <Button x:Name="btnAddTask" Content="Add new Task (Ctrl+N)" Height="{StaticResource GenerateButtonHeight}" Margin="0,0,0,5" HorizontalAlignment="Stretch"/>
                         <Button x:Name="btnEditTask" Content="Edit selected Task (Ctrl+E)" Height="{StaticResource GenerateButtonHeight}" Margin="0,0,0,5"/>
                         <Button x:Name="btnRemoveTask" Content="Delete selected Task (Del)" Height="{StaticResource GenerateButtonHeight}" Margin="0,0,0,5"/>
@@ -72,11 +73,16 @@
                         <Button x:Name="btnRecreateTasks" Content="Recreate tasks" Height="{StaticResource GenerateButtonHeight}" Margin="0,0,0,5"/>
                         <Button x:Name="btnSetIonsCountToAll" Content="Set Ions amount to N" Height="{StaticResource GenerateButtonHeight}" Margin="0,0,0,5"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Stretch">
-                        <Button x:Name="btnRunTask" Content="Run (F5)" Height="{StaticResource GenerateButtonHeight}"/>
-                        <Button x:Name="btnExtractOutputFiles" Content="Extract Output Files (F7)" Height="{StaticResource GenerateButtonHeight}"/>
+                    <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Stretch" Margin="0,5,0,0">
+                        <Button x:Name="btnRunTask" Content="Run (F5)" Height="{StaticResource GenerateButtonHeight}" Margin="0,0,0,5"/>
+                        <Button x:Name="btnExtractOutputFiles" Content="Extract Output Files (F7)" Height="{StaticResource GenerateButtonHeight}" Margin="0,0,0,5"/>
                     </StackPanel>
                 </Grid>
+            </TabItem>
+            <TabItem Header="Extra Tools">
+                <StackPanel>
+                    <Button x:Name="btnExtremeUnblockAllButtons" Content="Unblock all buttons" Height="{StaticResource GenerateButtonHeight}"/>
+                </StackPanel>
             </TabItem>
         </TabControl>
         <StatusBar Grid.Column="0" Grid.Row="1">

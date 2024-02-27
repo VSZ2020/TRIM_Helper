@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>TRIM_Helper</RootNamespace>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>TRIM Helper logo.ico</ApplicationIcon>
@@ -12,7 +12,8 @@
     <AssemblyName>TRIM_Helper</AssemblyName>
     <Authors>Izgagin Vyacheslav</Authors>
     <Company>Personal Product</Company>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.2.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

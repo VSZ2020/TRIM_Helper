@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using TRIM_Helper.Model.LayerModel;
 
 namespace TRIM_Helper.Model
@@ -8,19 +9,8 @@ namespace TRIM_Helper.Model
     {
         public bool IsExternalCoordinatesUsing = false;
         public string ExternalDataFilePath;
-        private string _Status;
         public bool IsActive { get; set; }
-        public string Status
-        {
-            get
-            {
-                return _Status;
-            }
-            set
-            {
-                _Status = value;
-            }
-        }
+        public string Status { get; set; }
         public string Name { get; set; }
 
         public TrimInputFile TrimInput;
@@ -60,13 +50,15 @@ namespace TRIM_Helper.Model
         /// Launch The Computationsl Task
         /// </summary>
         /// <param name="progress"></param>
-        public void Run(IProgress<int> progress)
+        public async Task RunAsync(IProgress<int> progress)
         {
             //var Layers = TrimInput?.Layers ?? new TargetLayer[] { new TargetLayer() { Description = "Null Layer", Phase = 0, Depth = 1000 } };
-            this.Status = "Generating TRIM.IN";
-            TrimInput.GenerateInputFile(WorkingDirectory);
-            this.Status = "Generating TRIM.dat";
-            TrimOutput.GenerateDataFile(WorkingDirectory, TrimInput._Ion, TrimInput.Layers, progress, IsExternalCoordinatesUsing, ExternalDataFilePath);
+            //this.Status = "Generating TRIM.IN...";
+            MainWindow.statusLabelCtrl.Text = "Generating TRIM.IN...";
+            await Task.Run(()=>TrimInput.GenerateInputFile(WorkingDirectory));
+            //this.Status = "Generating TRIM.dat...";
+            MainWindow.statusLabelCtrl.Text = "Generating TRIM.dat...";
+            await Task.Run(()=>TrimOutput.GenerateDataFile(WorkingDirectory, TrimInput._Ion, TrimInput.Layers, progress, IsExternalCoordinatesUsing, ExternalDataFilePath));
         }
     }
 }

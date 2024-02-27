@@ -44,6 +44,7 @@ namespace TRIM_Helper
                 this.curTrimInp = task.TrimInput;
                 this.curTrimDat = task.TrimOutput;
                 tbTaskName.Text = task.Name;
+                ExtractRootFolderName(task.WorkingDirectory);
                 WndMode = TasKWndMode.EDIT;
             }
 
@@ -69,6 +70,26 @@ namespace TRIM_Helper
             popbtnElementCancel.Click += PopbtnCancel_Click;
 
             this.Closing += TRIMDAT_Input_Closing;
+        }
+
+        private void ExtractRootFolderName(string source)
+        {
+            //var dInfo = System.IO.Directory.GetParent(source);
+            if (!string.IsNullOrEmpty(MainWindow.CurrentWorkingPath))
+                source = source.Replace(MainWindow.CurrentWorkingPath, "");
+
+            string[] buff = source.Split("\\");
+            if (buff.Length > 1)
+            {
+                if (tbTaskName.Text != buff[^1])
+                {
+                    MessageBox.Show("Incompatible task name and extracted folder name");
+                }
+                if (!string.IsNullOrWhiteSpace(buff[^2]))
+                {
+                    tbRootFolderName.Text = buff[^2];
+                }
+            }
         }
 
         private void TRIMDAT_Input_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -132,7 +153,7 @@ namespace TRIM_Helper
 
                 if (Read_TRIMIN_Fields() && Read_TRIMDAT_Inputs())
                 {
-                    //Если оба условия выполнены и ощибок нет, то создаем(заменяем) задачу
+                    //Если оба условия выполнены и ошибок нет, то создаем(заменяем) задачу
                     //Parse task name
                     string taskName = tbTaskName.Text;
                     if (string.IsNullOrEmpty(taskName))
@@ -141,14 +162,21 @@ namespace TRIM_Helper
                         MessageBox.Show("Incorrect task name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
+                    string workPath = "";
+                    if (string.IsNullOrEmpty(tbRootFolderName.Text))
+                    {
+                        workPath = System.IO.Path.Combine(MainWindow.CurrentWorkingPath, taskName);
+                    } else
+                    {
+                        workPath = System.IO.Path.Combine(MainWindow.CurrentWorkingPath, tbRootFolderName.Text, taskName);
+                    }
                     //Редактируем или создаем новое задание
                     if (WndMode == TasKWndMode.EDIT)
                     {
                         mTask.TrimInput = curTrimInp;
                         mTask.TrimOutput = curTrimDat;
                         mTask.Name = taskName;
-                        mTask.WorkingDirectory = MainWindow.CurrentWorkingPath + taskName + "\\";
-                        
+                        mTask.WorkingDirectory = workPath;
                     }
                     else
                     {
@@ -158,7 +186,7 @@ namespace TRIM_Helper
                             TrimOutput = curTrimDat,
                             IsActive = true,
                             Name = taskName,
-                            WorkingDirectory = MainWindow.CurrentWorkingPath + taskName + "\\"
+                            WorkingDirectory = workPath
                         };
                         MainWindow.Tasks.Add(task);
                         
@@ -168,7 +196,7 @@ namespace TRIM_Helper
                 }
                 else
                 {
-                    Debug.WriteLine("It's impossible add new task due to error(s) in input fields", "ERROR");
+                    Debug.WriteLine("It's impossible to add new task due to error(s) in input fields", "ERROR");
                 }
             }
             if (sender == btnCancel)

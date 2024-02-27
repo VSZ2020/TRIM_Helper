@@ -16,8 +16,11 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Row="0" Grid.Column="0" Header="Task name" Grid.ColumnSpan="2" Padding="5,0,5,0" Margin="0,0,0,0">
-            <TextBox x:Name="tbTaskName" Text="New task" Height="{StaticResource TextBoxesHeight}" VerticalContentAlignment="Center"/>
+        <GroupBox Header="Task name" Padding="5,0,5,0" Margin="0,0,5,0" Grid.Column="0" Grid.Row="0">
+            <TextBox x:Name="tbTaskName" Text="New task"  Height="{StaticResource TextBoxesHeight}" VerticalContentAlignment="Center"/>
+        </GroupBox>
+        <GroupBox Header="Root folder name" Padding="5,0,5,0" Margin="0,0,0,0" Grid.Column="1" Grid.Row="0">
+            <TextBox x:Name="tbRootFolderName" Text=""  Height="{StaticResource TextBoxesHeight}" VerticalContentAlignment="Center"/>
         </GroupBox>
         <!--Panel For Input File Data-->
         <GroupBox Header="TRIM.IN Parameters" Grid.Row="1" Grid.Column="0" Padding="5" VerticalAlignment="Top" Margin="0,0,5,0">

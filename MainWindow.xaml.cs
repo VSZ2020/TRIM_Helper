@@ -13,9 +13,13 @@ namespace TRIM_Helper
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static System.Windows.Controls.TextBlock statusLabelCtrl;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            statusLabelCtrl = statusLabel;
 
             Tasks = new ObservableCollection<ComputationalTask>();
 
@@ -37,16 +41,17 @@ namespace TRIM_Helper
             tbWorkingPath.TextChanged += TRIM_PathBox_TextChanged;
             btnSelectWorkDir.Click += ButtonClick;
             btnSelect_SRIM_Dir.Click += ButtonClick;
+            btnExtremeUnblockAllButtons.Click += ExtraButtonClick;
 
             this.Closing += MainWindow_Closing;
             tasksList.ItemsSource = Tasks;
 
             InitHotkeys();
-
-            UpdateButtonLabels();
             CreateDefaultTasks();
-
+            UpdateButtonLabels();
             SetDebugListeners();
+
+            
         }
 
         private void TasksList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -174,14 +179,11 @@ namespace TRIM_Helper
                 }
                 MessageBox.Show("Successfully completed!");
             }
+            tasksList.Items.Refresh();
         }
         private void TasksList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (tasksList.SelectedIndex > -1)
-            {
-                currentTaskIndex = tasksList.SelectedIndex;
-                UpdateButtonLabels();
-            }
+            UpdateButtonLabels();
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -256,12 +258,26 @@ namespace TRIM_Helper
 
             HotKeys.cancelTaskWnd.InputGestures.Add(new KeyGesture(Key.Escape, ModifierKeys.None));
 
-            CommandBindings.Add(new CommandBinding(HotKeys.runTaskCmd, (object sender, ExecutedRoutedEventArgs e) => TaskRunAction()));
+            CommandBindings.Add(new CommandBinding(HotKeys.runTaskCmd, (object sender, ExecutedRoutedEventArgs e) => RunCurrentTask()));
             CommandBindings.Add(new CommandBinding(HotKeys.extractTaskCmd, (object sender, ExecutedRoutedEventArgs e) => ButtonExtractTaskClick()));
 
             CommandBindings.Add(new CommandBinding(HotKeys.addTaskCmd, (object sender, ExecutedRoutedEventArgs e) => TaskAddAction()));
             CommandBindings.Add(new CommandBinding(HotKeys.editTaskCmd, (object sender, ExecutedRoutedEventArgs e) => TaskEditAction()));
             CommandBindings.Add(new CommandBinding(HotKeys.deleteTaskCmd, (object sender, ExecutedRoutedEventArgs e) => TaskRemoveAction()));
+        }
+
+        public void ExtraButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (sender == btnExtremeUnblockAllButtons)
+            {
+                btnAddTask.IsEnabled = true;
+                btnEditTask.IsEnabled = true;
+                btnRemoveTask.IsEnabled = true;
+                btnSelectWorkDir.IsEnabled = true;
+                btnSelect_SRIM_Dir.IsEnabled = true;
+                btnRunTask.IsEnabled = true;
+                btnExtractOutputFiles.IsEnabled = true;
+            }
         }
     }
 }
